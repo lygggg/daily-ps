@@ -1,5 +1,3 @@
-import { exportAllDeclaration } from "@babel/types";
-
 function stringbasic(s) {
     var temp = parseInt(s);
      if(s==temp){
