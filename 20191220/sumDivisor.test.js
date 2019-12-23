@@ -11,14 +11,9 @@ n의 약수를 구할때마다 더해준다.
 약수의 합을 리턴한다.
 */
 const sumDivisor = (n) => {
-    let sum = 0;
-    for(let i=1; i<=n; i++){
-        if(n%i==0){
-            sum+=i
-        }
-    }
-
-    return sum ;
+    const array = [1, 2, 3, 4, 5];
+    const test = array.map(num => num * 3);
+    console.log(test);
 }
 
 test('sumDivisor',() => {
