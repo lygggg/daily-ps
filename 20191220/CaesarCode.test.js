@@ -6,43 +6,14 @@
  문자열 맨뒤의 값을 구한다.
  맨뒤의 값의 아스키 코드를 구한후 +1해준값을 푸쉬해준다.
 */
-const sumDivisor = (s, n) => {
-  const code;
-   const answer =s.split('').map(a => {
-        code = a.charCodeAt(0);
-        if(code === 32){
-            return ' ';
-        }
-        else if(code >= 65 && code <= 90) {
-            if(code+n > 90) 
-                return String.fromCodePoint(code+n-26);
-            
-            else 
-                return String.fromCodePoint(code+n);
-            }
-            else if(code >= 97 && code <= 122) {
-                if(code+n > 122)
-                    return String.fromCharCode(code+n-26);
-                else
-                    return String.fromCharCode(code+n);
-            } 
-    }).join('');
-    return answer;
-}
-        
-test('sumDivisor',() => {
-    expect(sumDivisor("AB"),1).toBe("BC");
-    expect(sumDivisor("z"),1).toBe("a");
 
-})
-
-/*
+/* 2번 풀이
 function solution(s, n) {
     const re= s.replace(/(\s*)/g, "");
     const array = s.split("");
     let final = [];
     let a = [];
-    const real = [];
+    const real = [];g
     array.map(e => {
         final.push(e.charCodeAt());
     });
@@ -68,5 +39,31 @@ function solution(s, n) {
        real.push(String.fromCharCode(a[i]));
     }
     return real.join("")
+}
+*/
+
+/* 1번풀이
+const sumDivisor = (s, n) => {
+  const code;
+   const answer =s.split('').map(a => {
+        code = a.charCodeAt(0);
+        if(code === 32){
+            return ' ';
+        }
+        else if(code >= 65 && code <= 90) {
+            if(code+n > 90) 
+                return String.fromCodePoint(code+n-26);
+            
+            else 
+                return String.fromCodePoint(code+n);
+            }
+            else if(code >= 97 && code <= 122) {
+                if(code+n > 122)
+                    return String.fromCharCode(code+n-26);
+                else
+                    return String.fromCharCode(code+n);
+            } 
+    }).join('');
+    return answer;
 }
 */
