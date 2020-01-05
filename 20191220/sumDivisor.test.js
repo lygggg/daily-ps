@@ -9,15 +9,15 @@ n	return
 - n의 약수를 구한다.
 n의 약수를 구할때마다 더해준다.
 약수의 합을 리턴한다.
-*/
-const sumDivisor = (n) => {
-    const array = [1, 2, 3, 4, 5];
-    const test = array.map(num => num * 3);
-    console.log(test);
-}
+// */
+// const sumDivisor = (n) => {
+//     const array = [1, 2, 3, 4, 5];
+//     const test = array.map(num => num * 3);
+//     console.log(test);
+// }
 
-test('sumDivisor',() => {
-    expect(sumDivisor(12)).toBe(28);
-    expect(sumDivisor(5)).toBe(6);
-})
+// test('sumDivisor',() => {
+//     expect(sumDivisor(12)).toBe(28);
+//     expect(sumDivisor(5)).toBe(6);
+// })
 
