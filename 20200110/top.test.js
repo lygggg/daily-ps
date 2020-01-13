@@ -4,10 +4,8 @@ const top = (heights) => {
     for(let i =heights.length-1; i>=0; i--) {
        const fil = heights.filter(e=> e>heights[i]);
         heights.pop();
-        console.log(fil[fil.length-1])
         array.push(fil[fil.length-1]);
         all.push(heights.lastIndexOf(fil[fil.length-1])+1)
-        console.log(all);
     }
     return all.reverse();
 }
