@@ -1,11 +1,18 @@
 const solution = (n, stages) =>
-  Array(n).fill().map((_, i) => i + 1)
-    .map(s => ({ stage: s, rate: failureRate(s, stages) }))
-    .sort((a, b) => a.rate === b.rate ? a.stage - b.stage : b.rate - a.rate)
-    .map(v => v.stage);
+console.log(Array(n).fill().map((_, i) => i + 1).map(s => ({
+  stage: s, rate: failureRate(s, stages)
+  .sort((a, b) => a.rate === b.rate ? a.stage - b.stage : b.rate - a.rate)
+  .map(v => v.stage)
+})))
 
-const failureRate = (s, stages) =>
-  stages.filter(v => v === s).length / stages.filter(v => v >= s).length || 0;
+const failureRate = (s, stages) => stages.filter(v => v === s).length /stages.filter(v => v >=s).length || 0;
+
+  // Array(n).fill().map((_, i) => i + 1)
+  //   .map(s => ({ stage: s, rate: failureRate(s, stages) }))
+  //   .sort((a, b) => a.rate === b.rate ? a.stage - b.stage : b.rate - a.rate)
+  //   .map(v => v.stage);
+
+
 
 test('solution', () => {
   expect(solution(5, [2, 1, 2, 6, 2, 4, 3, 3])).toEqual([3,4,2,1,5]);
