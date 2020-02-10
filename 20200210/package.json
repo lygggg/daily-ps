@@ -1,0 +1,16 @@
+{
+  "name": "20200210",
+  "version": "1.0.0",
+  "description": "",
+  "main": "getMinNumber.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^25.1.2",
+    "jest": "^25.1.0"
+  }
+}
