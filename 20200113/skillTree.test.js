@@ -1,4 +1,7 @@
 function solution(skill, skill_trees) {
-    let arr = skill.split('');
-    
+    console.log(
+    skill_trees
+        .map(v => v.replace(new RegExp(`[^${skill}]`, 'g'), ''))
+        .filter(s => skill.startsWith(s)).length
+    );
 }
