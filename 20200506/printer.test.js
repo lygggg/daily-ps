@@ -9,37 +9,40 @@ A,B,C,D  2132 라면 CDAB다.
 내가 요청한 문서가 몇번째로 인쇄되는지 리턴해라
 
 계획
-처음부터 카운트를 세고 앞에서부터 차례대로 빼서 남은 배열과 비교한다.
-자신보다 큰 수가 있으면 카운트를 세고 뒤로 넣는다
-반복하다가 location 의 위치가 되면 그 카운트를 반환한다.
+객체배열을 만든다.
+내가 선택하려는 수가 그 배열의 맥스값이 아니라면 
+그 해당 값을 shift해서 push로 뒤에 넣는다.
+만약 내가 선택하려는 수가 최대값이면 뽑는다.
+내가 뽑은값이 내가 원하는 location 값이면 반복문을 멈추고
+count를 리턴한다. 
+
 */
 
 const printer = (priorities, location) => {
-  const startN = priorities[0];
   let count = 0;
-  const obPriorities = priorities.map((e, i) => ({ index: i, prioriti: e }));
+  const obPriorities = priorities.map((e, i) => ({ index: i, value: e }));
   while(true) {
-    
+    if(obPriorities[0].value == Math.max.apply(null, priorities)) {
+      count+=1;
+      if(obPriorities[0].index === location){
+        return count;
+      }
+      obPriorities.shift();
+      priorities.shift();
+    }
+    if(priorities[0] !== Math.max.apply(null,priorities)) {
+      const startN = obPriorities.shift();
+      obPriorities.push(startN);
+      const start = priorities.shift();
+      priorities.push(start);
+      
+    }
   }
-  // priorities.map((e, index) => {
-  //   count++;
-
-    // obPriorities.map((i) => {
-    //   if (e < i) {
-    //     const shiftNumber = priorities.shift();
-    //     console.log(shiftNumber);
-    //     priorities.push(shiftNumber);
-    //   }
-    //   if (index === i.index) {
-    //     console.log("시발");
-    //   }
-    // });
-  // });
 
   console.log(obPriorities);
 };
 
 test("printer", () => {
-  expect(printer([2, 1, 3, 2], 2)).toBe(1);
+  // expect(printer([2, 1, 3, 2], 2)).toBe(1);
   expect(printer([1, 1, 9, 1, 1, 1], 0)).toBe(5);
 });
