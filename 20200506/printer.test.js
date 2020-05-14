@@ -38,8 +38,6 @@ const printer = (priorities, location) => {
       
     }
   }
-
-  console.log(obPriorities);
 };
 
 test("printer", () => {
