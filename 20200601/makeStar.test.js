@@ -11,6 +11,6 @@ const makeStar = (data) => {
     const a = Number(n[0]), b = Number(n[1]);
     const arr = new Array(a).fill('*');
     for(let i = 0; i<b; i++) {
-        console.log(arr.join(''));
+        console.log(arr.join(''));c
         }
 }
