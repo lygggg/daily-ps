@@ -16,7 +16,8 @@ number 배열을 스피릿으로 배열로 만든후,
 지우면서 k의 값을 점점 감소한다.
 */
 
-const makeLargeNumber = (number, k) => {
+
+const makeLargeNumber1 = (number, k) => {
     let arr = number.split('');
     for(let i= 0; i < arr.length; i++) {
         for(let j = 0; j < k; j++) {
@@ -33,6 +34,22 @@ const makeLargeNumber = (number, k) => {
     return arr.filter(e=> e!==0).join('');
 }
 
+const makeLargeNumber2 = (number, k) => {
+    let arr = number.split('');
+    const arr1 = [];
+    for(let i =0; i < arr.length; i++) {
+        while(arr1[arr1.length-1] < arr[i] && k>0) {
+            arr1.pop();
+            k-=1;
+        }    
+    arr1.push(arr[i]);
+    }
+    console.log(k);
+    return arr1.splice(0,arr1.length-k).join('')
+}
 test('makeLargeNumber', () => {
-    expect(makeLargeNumber("1231234",3)).toBe("3234");
+    // expect(makeLargeNumber2("1231234",3)).toBe("3234");
+    // expect(makeLargeNumber2("4177252841",4)).toBe("775841");
+    expect(makeLargeNumber2("7777777",2)).toBe("77777");
+    // expect(makeLargeNumber2("10100",2)).toBe("110");
 })
