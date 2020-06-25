@@ -19,7 +19,7 @@
 
 const abstractWord = (s) => {
   const answer = [];
-  for (let i = 1; i <= 1; i += 1) {
+  for (let i = 1; i <= s.length; i += 1) {
     const result = [];
     let count = 0;
     let duplicate = s.slice(0, i);
@@ -43,7 +43,6 @@ const abstractWord = (s) => {
       }
 
     }
-    console.log(result.join("").replace(/1/g, ""))
     answer.push(result.join("").length);
   }
   return Math.min(...answer);
