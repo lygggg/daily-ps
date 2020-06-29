@@ -1,0 +1,16 @@
+{
+  "name": "20200629",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pokemon.test.js",
+  "dependencies": {
+    "jest": "^26.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
