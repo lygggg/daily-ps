@@ -15,12 +15,12 @@ const fibonacci = (n) => {
     let num = 0;
     let num1 = 0;
     let num2 = 1;
-    while(true) {
+    while(count !== n) {
         num = num1 + num2;
 
-        count+=1;
         num1 = num2;
         num2 = num;
+        count+=1;
     }
 }
 
