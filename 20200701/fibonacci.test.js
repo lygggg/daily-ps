@@ -8,22 +8,26 @@ n이 2일때 0+1 =1
 3일때 1+1
 4일때 2 +1
 
+1, 1, 2, 3, 5, 8, 13, ...
+f(n) = f()
+3 = f(n-1)+f(n-2)
 */
 
 const fibonacci = (n) => {
-    let count = 2;
-    let num = 0;
-    let num1 = 0;
-    let num2 = 1;
-    while(count !== n) {
-        num = num1 + num2;
+    let A = 0;
+    let B = 1;
+    let C = A+B;
 
-        num1 = num2;
-        num2 = num;
-        count+=1;
+    for(let i =0; i<n-2; i++){
+    A = B;
+    B = C;
+
+    C = (A+B)%1234567;
     }
+    return C;
 }
 
 test('fibonacci', () => {
     expect(fibonacci(3)).toBe(2);
+    expect(fibonacci(5)).toBe(5);
 })
