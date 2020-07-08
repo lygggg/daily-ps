@@ -11,24 +11,25 @@ const wordConversion = (begin, target, words) => {
     const arr = [];
     recursive(begin, target, words, 0, arr);
     console.log(arr);
-    
+    if(arr.length ===0) {
+        return 0;
+    }
+    return Math.min(...arr)
 }
 
 const recursive = (begin, target, words, count, arr) => {
-    if(begin == target) {
+    if(begin === target) {
         arr.push(count);
+        return;
     }
+    
 
     for(let i = 0; i < words.length; i++) {
         if(isMatch(begin, words[i]) === true) {
-            begin = words[i];
-            console.log(begin)
-            words.shift();
-            recursive(begin, target, words, count+1, arr);       
+            const words1 = words.slice();
+            words1.splice(words.indexOf(words[i]),1);    
+            recursive(words[i], target,words1, count+1, arr);
         }
-        if(i == words.length) {
-            return 0;
-        }    
     }
 }
 
@@ -54,5 +55,6 @@ test('isMatch', () => {
 });
 
 test('wordConversion', () => {
-    expect(wordConversion('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']	)).toBe(4);
+    // expect(wordConversion('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']	)).toBe(4);
+    expect(wordConversion('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log']	)).toBe(0);
 })
