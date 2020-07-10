@@ -21,7 +21,7 @@ const mockTest = (answers) => {
         for(let f=0; i>student1.length; f++){
            if(answers[i] == student1[i]) {
                count1 +=1;
-           } 
+           }
         }
     }
     console.log(count1);

@@ -16,46 +16,87 @@
 */
 
 const tracvelRoute = (tickets) => {
-    const finalArr = [];
-    const arr = [];
-    recursive(tickets,'ICN', arr, finalArr);
-    // console.log(finalArr);
-    return arr;
+    let Array = ['a'];
+    function1(Array,[...Array])
+    console.log(Array,Array,"qwweqw")
+    function2(Array,[...Array])
+    console.log(Array,"1");
+    // const finalArr = [];
+    // const arr = [];
+    // recursive(tickets,'ICN', arr, finalArr);
+    // // console.log(finalArr);
+    // return arr;
+
 }
 
-const recursive = (tickets, nextWord, arr, finalArr) => {
-    // console.log(arr);
-    if(tickets.length===0) {
-        arr.push(nextWord);
-        console.log(arr);
-        finalArr.push(arr);
-        return;
-    }
+const function1 = (Array1, Array2) => {
+    Array1.push('b')
+    Array2.push('b')
+    function3(Array1,[...Array2]);
+    function4(Array1,[...Array2]);
+    console.log(Array1,"2");
+    console.log(Array2);
+}
 
-    // for(let i =0; i<tickets.length; i++) {
-    //     if(tickets[i][0] === nextWord) {
-    //         arr1.push(tickets[i]);        
-    //     }
-    // }
+const function2 = (Array1, Array2) => {
+    Array1.push('c')
+    Array2.push('c')
+    console.log(Array1, Array2, ":asdasdasd");
+    function3(Array1,[...Array2]);
+    console.log(Array1, Array2, ":asdasdasdbbbbbbbbbb");
 
-    // arr1.sort(function(a,b) {
-    //     return a[1] < b[1] ? -1:1;
-    // })
-    // console.log(tickets);
-    for(let i =0; i<tickets.length; i++) {
-        // console.log(tickets[i][0], nextWord)
-            if(tickets[i][0] === nextWord) {
-                const copy = arr.slice();
-                copy.push(nextWord);
-                // console.log(nextWord);
-                const tickets1= tickets.slice();
-                tickets1.splice(tickets.indexOf(tickets[i]),1);
-                recursive(tickets1, tickets[i][1], copy,finalArr);
-            }
+    function4(Array1,[...Array2]);
+    console.log(Array1,"3");
+    console.log(Array2);
+}
+
+const function3 = (Array1, Array2) => {
+    Array1.push('d')
+    Array2.push('d')
+    console.log(Array1,"4");
+    console.log(Array2);
+}
+
+const function4 = (Array1, Array2) => {
+    Array1.push('e')
+    Array2.push('e')
+    console.log(Array1,"5");
+    console.log(Array2);
+}
+
+// const recursive = (tickets, nextWord, arr, finalArr) => {
+//     // console.log(arr);
+//     if(tickets.length===0) {
+//         arr.push(nextWord);
+//         console.log(arr);
+//         finalArr.push(arr);
+//         return;
+//     }
+
+//     // for(let i =0; i<tickets.length; i++) {
+//     //     if(tickets[i][0] === nextWord) {
+//     //         arr1.push(tickets[i]);        
+//     //     }
+//     // }
+
+//     // arr1.sort(function(a,b) {
+//     //     return a[1] < b[1] ? -1:1;
+//     // })
+//     // console.log(tickets);
+//     for(let i =0; i<tickets.length; i++) {
+//         // console.log(tickets[i][0], nextWord)
+//             if(tickets[i][0] === nextWord) {
+//                 const copy = arr.slice();
+//                 copy.push(nextWord);
+//                 // console.log(nextWord);
+//                 const tickets1= tickets.slice();
+//                 tickets1.splice(tickets.indexOf(tickets[i]),1);
+//                 recursive(tickets1, tickets[i][1], copy,finalArr);
+//             }
         
-    }
-    // console.log()
-}
+//     }
+//     // console.log()
+// }
 
 test('travelRoute', () => {
     // expect(tracvelRoute([['ICN', 'A'], ['ICN', 'B'], ['B', 'ICN']])).toEqual(['ICN', 'B', 'ICN', 'A']);

@@ -23,7 +23,6 @@ const recursive = (begin, target, words, count, arr) => {
         return;
     }
     
-
     for(let i = 0; i < words.length; i++) {
         if(isMatch(begin, words[i]) === true) {
             const words1 = words.slice();

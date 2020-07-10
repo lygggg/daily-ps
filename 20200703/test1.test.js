@@ -40,7 +40,6 @@ const complementArr = (arr1, arr2) => {
 }
 
 const intersectArr = (arr1, arr2) => {
-
     return divideArr(arr1.filter(e => arr2.includes(e)));
 }
 
