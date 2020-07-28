@@ -12,16 +12,34 @@
 네트워크의 개수
 
 계획
-computers의 배열만큼 
+computers의 이차원 배열을 순환하면서, 만약 
 
 
 
 */
 
-const network = () => {
-    return 2;
+const network = (n, computers) => {
+    let answer = 0;
+    const len = computers.length;
+    for(let i =0; i<len; i++) {
+        if(computers[i][i] !== -1) {
+            answer+=1;
+            dfs(computers, i, n);
+        }
+    }
+    return answer;
+}
+
+const dfs = (computers, idx, n) => {
+    for(let j = 0; j<n; j++) {
+        if(computers[idx][j]===1 && computers[idx][j] !== -1) {
+            computers[idx][j] = computers[j][idx] = -1;
+            dfs(computers, j, n);
+        }
+    }
 }
 
 test('network', () => {
-    
+    expect(network(3, [[1,1,0], [1,1,0],[0,0,1]])).toBe(2);
+    expect(network(3, [[1,1,0], [1,1,1],[0,1,1]])).toBe(1);
 })
