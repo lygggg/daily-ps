@@ -35,8 +35,4 @@ const hIndex = (citations) => {
 
 test('hIndex', () => {
     expect(hIndex([3,0,6,1,5])).toBe(3);
-}) 
-
-/*
-
-*/
+})
