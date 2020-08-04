@@ -1,0 +1,16 @@
+{
+  "name": "20200804",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hIndex.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^26.0.8",
+    "jest": "^26.2.2"
+  }
+}
