@@ -16,7 +16,6 @@ i행 j열의 값은 i번 학생이 평가한 j번 학생의 과제점수다.
 
 후기
 풀긴 풀었지만 화나는 문제였다. 조건이 너무 많다. 그래도 풀어서 다행이다
-
 */
 const mutualEvaluation = (scores) => {
     let result = [];
