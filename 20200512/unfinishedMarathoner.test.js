@@ -1,4 +1,4 @@
- /*
+/*
 이해
 - 단 한명의 선수를 제외하고 모든
 선수가 마라톤을 완주했다.
@@ -17,26 +17,36 @@ participant에 값이 있으면 해당 객체 +1 completion에 값이 있으면 
  */
 
 const unfinishedMarathoer = (participant, completion) => {
-    let player = {};
-    for(let i=0; i<participant.length; i++){
-        if(!player[participant[i]]){
-        player[participant[i]] = 1;
-        } else {
-            player[participant[i]] += 1;
-        }
-        if(!player[completion[i]]){
-            player[completion[i]] = -1;
-        } else {
-            player[completion[i]] -= 1;
-        }
+  let player = {};
+  for (let i = 0; i < participant.length; i++) {
+    if (!player[participant[i]]) {
+      player[participant[i]] = 1;
+    } else {
+      player[participant[i]] += 1;
     }
-    return Object.keys(player).filter(x=> player[x] === 1)[0];
-}
+    if (!player[completion[i]]) {
+      player[completion[i]] = -1;
+    } else {
+      player[completion[i]] -= 1;
+    }
+  }
+  return Object.keys(player).filter((x) => player[x] === 1)[0];
+};
 
- test('unfinishedMarathoner', () => {
-     expect(unfinishedMarathoer(["leo", "kiki", "eden"],["eden", "kiki"])).toBe('leo');
-     expect(unfinishedMarathoer(["marina", "josipa", "nikola", "vinko", "filipa"],["josipa", "filipa", "marina", "nikola"])).toBe('vinko');
-     expect(unfinishedMarathoer(["mislav", "stanko", "mislav", "ana"],["stanko", "ana", "mislav"])).toBe('mislav');
- })
-
- 
+test("unfinishedMarathoner", () => {
+  expect(unfinishedMarathoer(["leo", "kiki", "eden"], ["eden", "kiki"])).toBe(
+    "leo"
+  );
+  expect(
+    unfinishedMarathoer(
+      ["marina", "josipa", "nikola", "vinko", "filipa"],
+      ["josipa", "filipa", "marina", "nikola"]
+    )
+  ).toBe("vinko");
+  expect(
+    unfinishedMarathoer(
+      ["mislav", "stanko", "mislav", "ana"],
+      ["stanko", "ana", "mislav"]
+    )
+  ).toBe("mislav");
+});
