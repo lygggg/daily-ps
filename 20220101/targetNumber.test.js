@@ -17,7 +17,6 @@ const targetNumber = (numbers, target) => {
 };
 
 const conculate = (numbers, target, arr, sum) => {
-  console.log(numbers, target, arr, sum);
   if (numbers.length === 0) {
     if (sum === target) {
       arr.push(target);
