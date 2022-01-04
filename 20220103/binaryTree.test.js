@@ -1,7 +1,6 @@
 const binaryTree = (arr) => {
   let num = arr[0];
   conculate(arr, num, (result = []));
-  console.log(result);
 };
 
 const conculate = (arr, num, result) => {
