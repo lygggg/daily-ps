@@ -1,0 +1,15 @@
+{
+  "name": "20220105",
+  "version": "1.0.0",
+  "description": "",
+  "main": "subset.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.4.6"
+  }
+}
