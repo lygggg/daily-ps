@@ -1,5 +1,23 @@
 {
-  "dependencies": {
-    "jest": "^27.4.5"
-  }
+  "name": "daily-ps",
+  "description": "1. 이해    - 문제를 읽으면서 내가 이해한 것을 나열한다. 2. 구해야하는 것    - 문제에서 내가 구해야하는것, 궁극적인 목표를 적는다 3. 계획",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lygggg/daily-ps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lygggg/daily-ps/issues"
+  },
+  "homepage": "https://github.com/lygggg/daily-ps#readme"
 }
