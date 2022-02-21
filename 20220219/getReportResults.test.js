@@ -12,10 +12,21 @@
 */
 
 const getReportResults = (id_list, report, k) => {
-  const result = Array(id_list.length).fill(0);
-  const count = Array(id_list.length).fill(0);
-  const idArr = Array.from(Array(id_list.length), () => new Array(0));
   const splitArr = report.map((e) => e.split(" "));
+
+  const idArr = getReportArg(id_list, splitArr);
+
+  const duplicateArr = removeDupArr(idArr);
+
+  const count = getCountArr(duplicateArr, id_list);
+
+  const result = getExceedCountArr(id_list, count, duplicateArr, k);
+
+  return result;
+};
+
+const getReportArg = (id_list, splitArr) => {
+  const idArr = Array.from(Array(id_list.length), () => new Array(0));
   splitArr.forEach((e, i) => {
     id_list.forEach((id, index) => {
       if (e[1] === id) {
@@ -23,20 +34,33 @@ const getReportResults = (id_list, report, k) => {
       }
     });
   });
+  return idArr;
+};
 
+const removeDupArr = (idArr) => {
   const duplicateArr = idArr.map((e) =>
     e.filter((element, index) => {
       return e.indexOf(element) === index;
     })
   );
+  return duplicateArr;
+};
+
+const getCountArr = (duplicateArr, id_list) => {
+  const countArr = Array(id_list.length).fill(0);
   duplicateArr.forEach((e, i) => {
     e.forEach((id, index) => {
       const check = id_list.indexOf(e[index]);
       if (check !== -1) {
-        count[check] += 1;
+        countArr[check] += 1;
       }
     });
   });
+  return countArr;
+};
+
+const getExceedCountArr = (id_list, count, duplicateArr, k) => {
+  const result = Array(id_list.length).fill(0);
 
   const kArr = id_list.filter((e, i) => {
     if (count[i] >= k) {
@@ -54,11 +78,53 @@ const getReportResults = (id_list, report, k) => {
   });
   return result;
 };
+
 test("getReportResults", () => {
   expect(
     getReportResults(
       ["muzi", "frodo", "apeach", "neo"],
       ["muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"],
+      2
+    )
+  ).toEqual([2, 1, 1, 0]);
+});
+
+test("getReportArg", () => {
+  expect(
+    getReportArg(
+      ["muzi", "frodo", "apeach", "neo"],
+      [
+        ["muzi", "frodo"],
+        ["apeach", "frodo"],
+        ["frodo", "neo"],
+        ["muzi", "neo"],
+        ["apeach", "muzi"],
+      ]
+    )
+  ).toEqual([["frodo", "neo"], ["neo"], ["frodo", "muzi"], []]);
+});
+
+test("removeDupArr", () => {
+  expect(
+    removeDupArr([["frodo", "neo", "frodo"], ["neo"], ["frodo", "muzi"], []])
+  ).toEqual([["frodo", "neo"], ["neo"], ["frodo", "muzi"], []]);
+});
+
+test("getCountArr", () => {
+  expect(
+    getCountArr(
+      [["frodo", "neo"], ["neo"], ["frodo", "muzi"], []],
+      ["muzi", "frodo", "apeach", "neo"]
+    )
+  ).toEqual([1, 2, 0, 2]);
+});
+
+test("getExceedCountArr", () => {
+  expect(
+    getExceedCountArr(
+      ["muzi", "frodo", "apeach", "neo"],
+      [1, 2, 0, 2],
+      [["frodo", "neo"], ["neo"], ["frodo", "muzi"], []],
       2
     )
   ).toEqual([2, 1, 1, 0]);
