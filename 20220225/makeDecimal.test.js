@@ -1,12 +1,3 @@
-const isPrime = (n) => {
-  for (let i = 2; i <= Math.sqrt(n); i++) {
-    if (n % i == 0) {
-      return false;
-    }
-  }
-  return true;
-};
-
 const makeDecimal = (nums) => {
   let count = 0;
 
@@ -22,6 +13,20 @@ const makeDecimal = (nums) => {
   return count;
 };
 
+const isPrime = (n) => {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i == 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
 test("makeDecimal", () => {
   expect(makeDecimal([1, 2, 3, 4])).toBe(1);
+});
+
+test("isPrime", () => {
+  expect(isPrime(7)).toBe(true);
+  expect(isPrime(6)).toBe(false);
 });
