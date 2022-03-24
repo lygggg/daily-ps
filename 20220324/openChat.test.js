@@ -61,9 +61,7 @@ return하세요.
 
 계획
 일단 record배열에 있는 값들을 " "를 기준으로 split하고 user 라는 객체에 "Leave"값이 아닐떄만 id: name값으로 저장한다.
-record를 먼저 돌면서 배열 첫번째가 change면 그 해당 배열에 두번째 값과 같은 id값을 user객체에서
-찾아서 name을 세번째 값으로 변경시킨다. 그후 record의 첫번째 값이 change가 아닌 값들만 돌면서 
-result에 양식대로 푸쉬한다.
+record를 먼저 돌면서 배열 첫번째가 "Change"가 아니고, "Enter", "Leave"면 해당 key값이 같은 user의 name을 출력 
 */
 
 const openChat = (record) => {
