@@ -27,6 +27,9 @@ x1 행 y1 열부터 2x 행 y2 열까지의 영역에 해당하는 직사각형�
 1부터 증가하는 rows, columns만큼의 이중배열을 만들고, 배열의 맨 처음값을 저장한 상태에서 회전한 값을 적용해주면서 회전 한값들을
 minArr에 넣고 한바퀴를 다돌면 가장 작은 값을 구해서 result 배열에 넣고 반복한다. 회전을 모두 수행하면 결과를 리턴한다.
 */
+// 하 우 상 좌
+const dx = [0, 1, 0, -1];
+const dy = [1, 0, -1, 0];
 
 const matrixRotation = (rows, columns, queries) => {
   const matrix = [];
@@ -44,59 +47,94 @@ const matrixRotation = (rows, columns, queries) => {
   }
 
   for (let i = 0; i < queries.length; i++) {
-    let firstNumber = matrix[queries[i][0] - 1][queries[i][1] - 1];
     const [x, y, xx, yy] = queries[i];
-    const minArr = [];
-    for (let left = x - 1; left < xx - 1; left++) {
-      // 왼쪽
-      minArr.push(matrix[left + 1][y - 1]);
-      matrix[left][y - 1] = matrix[left + 1][y - 1];
-    }
 
-    for (let down = y - 1; down < yy - 1; down++) {
-      // 아래
-      minArr.push(matrix[xx - 1][down + 1]);
-      matrix[xx - 1][down] = matrix[xx - 1][down + 1];
-    }
-
-    for (let right = xx - 1; right > x - 1; right--) {
-      // 오른쪽
-
-      minArr.push(matrix[right - 1][yy - 1]);
-      matrix[right][yy - 1] = matrix[right - 1][yy - 1];
-    }
-
-    for (let top = yy - 1; top > y - 1; top--) {
-      // 위
-
-      minArr.push(matrix[x - 1][top - 1]);
-      matrix[x - 1][top] = matrix[x - 1][top - 1];
-    }
-
-    minArr.push(firstNumber);
-    matrix[x - 1][y] = firstNumber;
-    result.push(Math.min(...minArr));
+    // result.push(rotate(x, y, xx, yy, matrix));
+    result.push(rotate2(y, x, yy, xx, matrix));
   }
   return result;
 };
 
+const rotate2 = (sx, sy, ex, ey, matrix) => {
+  let firstNumber = matrix[sy - 1][sx - 1];
+  const minArr = [firstNumber];
+  let x = sx - 1;
+  let y = sy - 1;
+  let d = 0;
+
+  while (true) {
+    const nx = x + dx[d];
+    const ny = y + dy[d];
+    if (nx === sx - 1 && ny === sy - 1) {
+      break;
+    }
+    matrix[y][x] = matrix[ny][nx];
+    x = nx;
+    y = ny;
+    // 오른쪽으로 갈때는 y=5 x=2 위로 갈때는 y=5이고x가4 일때
+    // 왼쪽으로 갈때는 y=2 x=4 일때
+    if (
+      (y === ey - 1 && x === sx - 1) ||
+      (y === ey - 1 && x === ex - 1) ||
+      (y === sy - 1 && x === ex - 1)
+    ) {
+      d += 1;
+    }
+    minArr.push(matrix[y][x]);
+  }
+  matrix[y][x] = firstNumber;
+  return Math.min(...minArr);
+};
+
+const rotate = (x, y, xx, yy, matrix) => {
+  let firstNumber = matrix[x - 1][y - 1];
+  const minArr = [firstNumber];
+
+  for (let left = x - 1; left < xx - 1; left++) {
+    // 왼쪽
+    minArr.push(matrix[left + 1][y - 1]);
+    matrix[left][y - 1] = matrix[left + 1][y - 1];
+  }
+
+  for (let down = y - 1; down < yy - 1; down++) {
+    // 아래
+    minArr.push(matrix[xx - 1][down + 1]);
+    matrix[xx - 1][down] = matrix[xx - 1][down + 1];
+  }
+
+  for (let right = xx - 1; right > x - 1; right--) {
+    // 오른쪽
+
+    minArr.push(matrix[right - 1][yy - 1]);
+    matrix[right][yy - 1] = matrix[right - 1][yy - 1];
+  }
+
+  for (let top = yy - 1; top > y - 1; top--) {
+    // 위
+
+    minArr.push(matrix[x - 1][top - 1]);
+    matrix[x - 1][top] = matrix[x - 1][top - 1];
+  }
+
+  matrix[x - 1][y] = firstNumber;
+  return Math.min(...minArr);
+};
+
 test("matrixRotation", () => {
   expect(
-    matrixRotation(3, 5, [
-      [1, 1, 2, 2],
-      [2, 3, 3, 4],
-      [1, 2, 3, 4],
-      [1, 1, 3, 4],
-      [2, 2, 3, 5],
+    matrixRotation(6, 6, [
+      [2, 2, 5, 4],
+      [3, 3, 6, 6],
+      [5, 1, 6, 3],
     ])
-  ).toEqual([1, 8, 1, 1, 3]);
-  expect(
-    matrixRotation(3, 3, [
-      [1, 1, 2, 2],
-      [1, 2, 2, 3],
-      [2, 1, 3, 2],
-      [2, 2, 3, 3],
-    ])
-  ).toEqual([1, 1, 5, 3]);
-  expect(matrixRotation(100, 97, [[1, 1, 100, 97]])).toEqual([1]);
+  ).toEqual([8, 10, 25]);
+  // expect(
+  //   matrixRotation(3, 3, [
+  //     [1, 1, 2, 2],
+  //     [1, 2, 2, 3],
+  //     [2, 1, 3, 2],
+  //     [2, 2, 3, 3],
+  //   ])
+  // ).toEqual([1, 1, 5, 3]);
+  // expect(matrixRotation(100, 97, [[1, 1, 100, 97]])).toEqual([1]);
 });
