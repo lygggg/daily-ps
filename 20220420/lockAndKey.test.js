@@ -19,16 +19,22 @@
  */
 
 const lockAndKey = (key, lock) => {
+  // key와 lock이 겹치는 부분을 체크하기 위한 이차원 배열
   const checkArr = Array.from(Array(lock.length + (key.length - 1) * 2), () =>
     Array(lock.length + (key.length - 1) * 2).fill(0)
   );
-  for (let i = 0; i < lock.length * 2 - 1; i++) {
-    const resultArr = [];
-    for (let j = 0; j < lock.length * 2 - 1; j++) {
-      let state = true;
 
+  for (let y = 0; y < checkArr.length - (key.length - 1); y++) {
+    for (let x = 0; x < checkArr[y].length - (key.length - 1); x++) {
       //3번 회전
       for (let c = 0; c < 4; c++) {
+        // checkArr 초기화
+        for (let si = 0; si < lock.length; si++) {
+          for (let sj = 0; sj < lock.length; sj++) {
+            checkArr[key.length - 1 + si][key.length - 1 + sj] = lock[si][sj];
+          }
+        }
+
         let rotate = Array.from(Array(key.length), () =>
           Array(key.length).fill(0)
         );
@@ -44,11 +50,11 @@ const lockAndKey = (key, lock) => {
         for (let row = 0; row < key.length; row++) {
           for (let col = 0; col < key.length; col++) {
             if (rotate[row][col] === 1) {
-              checkArr[i + row][j + col] += 1;
+              checkArr[y + row][x + col] += 1;
             }
           }
         }
-
+        let state = true;
         // checkArr의 lock부분이 다 1인지 확인하는 로직
         for (let ci = 0; ci < lock.length; ci++) {
           for (let cj = 0; cj < lock.length; cj++) {
@@ -59,21 +65,9 @@ const lockAndKey = (key, lock) => {
           }
         }
 
-        // checkArr 초기화
-        for (let si = 0; si < lock.length; si++) {
-          for (let sj = 0; sj < lock.length; sj++) {
-            if (lock[si][sj] === 1) {
-              checkArr[key.length - 1 + si][key.length - 1 + sj] = 1;
-            } else {
-              checkArr[key.length - 1 + si][key.length - 1 + sj] = 0;
-            }
-          }
-        }
         if (state === true) {
-          console.log(i, j, c);
           return true;
         }
-        resultArr.push(state);
         key = rotate;
       }
     }
