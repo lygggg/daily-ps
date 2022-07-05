@@ -5,8 +5,8 @@ const [input] = require("fs")
   .split("\n");
 
 const arr = input.split("");
-const answer = [];
 const checkArr = Array(arr.length).fill(false);
+const answer = [];
 const recursive = (left, right) => {
   if (left === right) return;
   let result = "";
@@ -15,10 +15,9 @@ const recursive = (left, right) => {
   checkArr[minIdx] = true;
 
   for (let i = 0; i < arr.length; i++) {
-    if (checkArr[i]) result += arr[i];
+    if (checkArr[i]) answer[i] = arr[i];
   }
-  console.log(result);
-  answer.push(result);
+  console.log(answer.join(""));
   recursive(minIdx + 1, right);
   recursive(left, minIdx);
 };
