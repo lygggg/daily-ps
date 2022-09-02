@@ -24,10 +24,14 @@ const menuRenewal = (orders, course) => {
       });
     }
   }
+
   const mapArr = [...map];
   course.forEach((e) => {
     const maxMenu = mapArr
       .filter(([menu, index]) => {
+        if (index < 2) {
+          return;
+        }
         if (menu.length === e) {
           return [menu, index];
         }
@@ -35,7 +39,7 @@ const menuRenewal = (orders, course) => {
       .sort((a, b) => b[1] - a[1]);
 
     maxMenu.forEach((e) => {
-      if (e[1] === maxMenu[0][1] && e[1] >= 2) {
+      if (e[1] === maxMenu[0][1]) {
         result.push(e[0]);
       }
     });
