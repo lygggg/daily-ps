@@ -1,13 +1,12 @@
 const maximaizeFormula = (expression) => {
-  var answer = 0;
+  const result = [];
   const mathExp = ["*", "+", "-"];
   let priorityArr = Permutation(mathExp, 3);
-  const calculated = [];
   for (const priority of priorityArr) {
     const expressionArr = expression.split(/(\D)/);
-    for (const exp of priority) {
-      while (expressionArr.includes(exp)) {
-        const index = expressionArr.indexOf(exp);
+    for (const formula of priority) {
+      while (expressionArr.includes(formula)) {
+        const index = expressionArr.indexOf(formula);
         expressionArr.splice(
           index - 1,
           3,
@@ -15,10 +14,9 @@ const maximaizeFormula = (expression) => {
         );
       }
     }
-    calculated.push(Math.abs(expressionArr[0]));
+    result.push(Math.abs(expressionArr[0]));
   }
-  answer = Math.max(...calculated);
-  return answer;
+  return Math.max(...result);
 };
 
 function Permutation(arr, r) {
