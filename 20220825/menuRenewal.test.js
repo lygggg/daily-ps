@@ -1,48 +1,27 @@
-/*
-주의사항
-1. 코스요리 메뉴는 최소 2가지 이상의 단품메뉴
-2. 최소 2명 이상의 손님으로부터 주문된 단품메뉴
-*/
-
 const menuRenewal = (orders, course) => {
   const splitOrders = orders.map((e) => e.split("").sort());
   const map = new Map();
-  const result = [];
-  for (let i = 0; i < splitOrders.length; i++) {
-    for (let j = 0; j < course.length; j++) {
-      if (splitOrders[i].length < course[j]) {
-        continue;
-      }
-      const combinationArr = combination(splitOrders[i], course[j]);
+
+  for (const splitOrder of splitOrders) {
+    for (const count of course) {
+      if (splitOrder.length < count) continue;
+      const combinationArr = combination(splitOrder, count);
       combinationArr.forEach((e) => {
         const word = e.join("");
-        if (map.has(word)) {
-          map.set(word, map.get(word) + 1);
-        } else {
-          map.set(word, 1);
-        }
+        map.has(word) ? map.set(word, map.get(word) + 1) : map.set(word, 1);
       });
     }
   }
 
-  const mapArr = [...map];
+  const result = [];
   course.forEach((e) => {
-    const maxMenu = mapArr
+    const maxMenu = [...map]
       .filter(([menu, index]) => {
-        if (index < 2) {
-          return;
-        }
-        if (menu.length === e) {
-          return [menu, index];
-        }
+        if (index < 2) return;
+        if (menu.length === e) return [menu, index];
       })
       .sort((a, b) => b[1] - a[1]);
-
-    maxMenu.forEach((e) => {
-      if (e[1] === maxMenu[0][1]) {
-        result.push(e[0]);
-      }
-    });
+    maxMenu.forEach((e) => e[1] === maxMenu[0][1] && result.push(e[0]));
   });
   return result.sort();
 };
