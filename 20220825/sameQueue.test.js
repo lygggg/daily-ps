@@ -1,25 +1,34 @@
 const sameQueue = (queue1, queue2) => {
+  let sum1 = queue1.reduce((a, b) => a + b);
+  let sum2 = queue2.reduce((a, b) => a + b);
+  const sumQueue = (sum1 + sum2) / 2;
   let count = 0;
-  const sumQueue = [...queue1, ...queue2];
-  const target = sumQueue.reduce((pre, cur) => pre + cur) / 2;
-  let ai = 0;
-  let bi = queue1.length;
-  let sum = sumQueue.slice(ai, bi).reduce((pre, cur) => pre + cur);
-  while (sumQueue.length * 3 >= count) {
-    if (sum < target) {
-      sum += sumQueue[bi];
-      bi += 1;
-    } else if (sum > target) {
-      sum -= sumQueue[ai];
-      ai += 1;
-    } else if (target === sum) {
+  const max1 = queue1.length;
+  const max2 = queue2.length;
+  let queue1Index = 0;
+  let queue2Index = 0;
+
+  while (queue1Index < max1 || queue2Index < max2) {
+    if (sum1 > sumQueue) {
+      const poped = queue1[queue1Index];
+      queue2.push(poped);
+      queue1Index += 1;
+      sum1 -= poped;
+      count += 1;
+    } else if (sum1 < sumQueue) {
+      const poped = queue2[queue2Index];
+      queue1.push(poped);
+      queue2Index += 1;
+      sum1 += poped;
+      count += 1;
+    }
+    if (sum1 === sumQueue) {
       return count;
     }
-    count++;
   }
   return -1;
 };
 
 test("sameQueue", () => {
-  expect(sameQueue([1, 2, 1, 2], [1, 10, 1, 2])).toBe(7);
+  expect(sameQueue([1, 1], [1, 5])).toBe(-1);
 });
