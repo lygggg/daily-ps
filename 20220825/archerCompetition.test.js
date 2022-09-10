@@ -15,7 +15,6 @@ class State {
 const archerCompetition = (n, info) => {
   const result = [];
   const arrResult = [];
-  let max = 0;
   let apeachSum = 0;
   info.forEach((e, i) => {
     if (e) {
@@ -31,9 +30,6 @@ const archerCompetition = (n, info) => {
     while (stack.length !== 0) {
       // 현재 방문할 상태
       const { index, sum, count, isVisited } = stack.pop();
-      //   console.log(isVisited);
-      // 화살개수, 인덱스, 합, 현재 남은 갯수
-      // state에 대한 처리
 
       if (count < 0) {
         continue;
@@ -41,23 +37,22 @@ const archerCompetition = (n, info) => {
       if (count > n) {
         continue;
       }
-      if (count === 0) {
-        let value = 0;
-        isVisited.forEach((e, i) => {
-          if (e && info[i]) {
-            value += Math.abs(10 - i);
-          } else if (e) {
-            value += Math.abs(10 - i);
-          } else if (info[i]) {
-            value -= Math.abs(10 - i);
-          }
-        });
-        if (value > 0) {
-          result.push(value);
-          arrResult.push(isVisited);
+      let value = 0;
+      isVisited.forEach((e, i) => {
+        if (e && info[i]) {
+          value += Math.abs(10 - i);
+        } else if (e) {
+          value += Math.abs(10 - i);
+        } else if (info[i]) {
+          value -= Math.abs(10 - i);
         }
+      });
+      if (value > 0) {
+        result.push(value);
+        isVisited[isVisited.length - 1] = count;
+        arrResult.push(isVisited);
       }
-      for (let i = 0; i < 11; i++) {
+      for (let i = 0; i < info.length; i++) {
         let nextIndex = index + i;
         let next = info[nextIndex] + 1;
         if (nextIndex > 10) {
@@ -93,19 +88,37 @@ const archerCompetition = (n, info) => {
   }
 
   const maxArr = [];
-  console.log(Math.max(...result));
   result.forEach((e, i) => {
     if (e === Math.max(...result)) {
       maxArr.push(arrResult[i]);
     }
   });
   // 19 27 34 40 45
-  console.log(maxArr);
+  const value = [];
+  maxArr.forEach((e) => {
+    const arr = e.map((item, i) => {
+      if (i === 10) {
+        return item;
+      }
+      if (item) {
+        return info[i] + 1;
+      } else {
+        return 0;
+      }
+    });
+    value.push(arr.reverse());
+  });
+  value.sort((a, b) => {
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] > b[i]) return -1;
+      if (a[i] < [b[i]]) return 1;
+    }
+  });
+  return value[0].reverse();
 };
-// 10 8 7 25
-// 9 6 5 4 24
+
 test("archerCompetition", () => {
-  expect(archerCompetition(10, [0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0])).toEqual([
+  expect(archerCompetition(10, [0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3])).toEqual([
     1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2,
   ]);
 });
